@@ -1,4 +1,4 @@
-import fitz  # PyMuPDF
+import fitz  
 import spacy
 import json
 import re

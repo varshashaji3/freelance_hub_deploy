@@ -324,7 +324,7 @@ def make_payment(request, installment_id):
         else:
             return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -378,7 +378,7 @@ def payment_success(request):
     installment.status = 'paid'
     installment.save()
 
-    return render(request, 'client/success.html', {'installment': installment})
+    return render(request, 'Client/success.html', {'installment': installment})
 
 
 
@@ -447,7 +447,7 @@ def AddProfileClient(request, uid):
 
         return redirect('client:client_view')
 
-    return render(request, 'client/add_profile_client.html', {'profile': profile, 'client_profile': client_profile})
+    return render(request, 'Client/add_profile_client.html', {'profile': profile, 'client_profile': client_profile})
 
 
 @login_required
@@ -504,7 +504,7 @@ def update_profile(request, uid):
 
         return redirect('client:account_settings')
 
-    return render(request, 'client/profile.html', {'profile1': profile1, 'profile2': profile2, 'client': client})
+    return render(request, 'Client/profile.html', {'profile1': profile1, 'profile2': profile2, 'client': client})
 
 
 
@@ -518,7 +518,7 @@ def account_settings(request):
     profile2=Register.objects.get(user_id=uid)
     client=ClientProfile.objects.get(user_id=uid)
     
-    return render(request, 'client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
+    return render(request, 'Client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
 
 
 
@@ -545,13 +545,13 @@ def change_password(request, uid):
             profile1.set_password(new_pass)
             profile1.save()
             messages.success(request, 'Your password has been changed successfully!')
-            return render(request, 'client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
+            return render(request, 'Client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
     
             
         else:
             messages.error(request, 'Current password is incorrect.')
 
-    return render(request, 'client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
+    return render(request, 'Client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
     
     
     
@@ -578,7 +578,7 @@ def change_profile_image(request,uid):
             profile2.save()
             
             return redirect('client:account_settings')
-    return render(request, 'client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
+    return render(request, 'Client/profile.html',{'profile1':profile1,'profile2':profile2,'client':client})
 
 @login_required
 @nocache
@@ -592,7 +592,7 @@ def download_invoice(request, contract_id):
     today = date.today()  # Get today's date
 
     # Render the HTML template with context
-    html_content = render_to_string('client/InvoiceDownload.html', {
+    html_content = render_to_string('Client/InvoiceDownload.html', {
         'project': project,
         'payments': payments,
         'today': today
@@ -689,7 +689,7 @@ def freelancer_list(request):
             "coreldraw", "affinity designer", "adobe photoshop", "adobe indesign", "canva", "opencv"
         ]
 
-        return render(request, 'client/ViewFreelancers.html', {
+        return render(request, 'Client/ViewFreelancers.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -701,7 +701,7 @@ def freelancer_list(request):
             'skill_choices': skill_choices,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -745,7 +745,7 @@ def freelancer_detail(request, fid):
                 'reviewer_image': reviewer_profile.profile_picture.url if reviewer_profile.profile_picture else None,
             })
 
-        return render(request, 'client/SingleFreelancer.html', {
+        return render(request, 'Client/SingleFreelancer.html', {
             'profile1': profile1,
             'profile2': profile2,
             'freelancer': freelancer,
@@ -756,7 +756,7 @@ def freelancer_detail(request, fid):
             "reviews": review_details,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -790,14 +790,14 @@ def calendar(request):
     ]
 
     if profile1.permission:
-        return render(request, 'client/calendar.html', {
+        return render(request, 'Client/calendar.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
             'events_data': events_data  
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -838,7 +838,7 @@ def add_event(request):
             )
             return redirect('client:calendar')
     else:
-        return render(request, 'client/PermissionDenied.html',{'profile1': profile1,
+        return render(request, 'Client/PermissionDenied.html',{'profile1': profile1,
             'profile2': profile2,
             'client': client,})   
         
@@ -888,7 +888,7 @@ def update_event(request):
 
             event = get_object_or_404(Event, id=event_id)
 
-            return render(request, 'client/edit_event.html', {
+            return render(request, 'Client/edit_event.html', {
                 'event': event,
                 'profile1': profile1,
                 'profile2': profile2,
@@ -896,7 +896,7 @@ def update_event(request):
             })
 
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -931,7 +931,7 @@ def delete_event(request):
             return redirect('client:calendar')
 
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -969,7 +969,7 @@ def add_new_project(request):
             # Check if a project with the same title already exists for this user
             if Project.objects.filter(title=title, user=request.user).exists():
                 messages.error(request, 'A project with this title already exists!')
-                return render(request, 'client/NewProject.html', {
+                return render(request, 'Client/NewProject.html', {
                     'profile1': profile1, 
                     'profile2': profile2, 
                     'client': client, 
@@ -990,20 +990,20 @@ def add_new_project(request):
             project.save()
             projects = Project.objects.filter(user_id=uid)
             messages.success(request, 'New Project Added Successfully!!')
-            return render(request, 'client/ProjectList.html', {
+            return render(request, 'Client/ProjectList.html', {
                 'profile1': profile1,
                 'profile2': profile2,
                 'client': client,
                 'projects': projects
             })
-        return render(request, 'client/NewProject.html', {
+        return render(request, 'Client/NewProject.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
             'categories': categories
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1058,7 +1058,7 @@ def edit_project(request, pid):
             project.save()
             return redirect('client:project_list')
 
-        return render(request, 'client/UpdateProject.html', {
+        return render(request, 'Client/UpdateProject.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1066,7 +1066,7 @@ def edit_project(request, pid):
             'project': project
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client
@@ -1109,7 +1109,7 @@ def project_list(request):
             repository = Repository.objects.filter(project=project).first()
             project_repos[project.id] = repository.id if repository else None
 
-        return render(request, 'client/ProjectList.html', {
+        return render(request, 'Client/ProjectList.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1118,7 +1118,7 @@ def project_list(request):
             'project_repos': project_repos,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1150,7 +1150,7 @@ def single_project_view(request,pid):
         
         additional_files = ProposalFile.objects.filter(proposal__in=proposals)
 
-        return render(request, 'client/SingleProject.html', {
+        return render(request, 'Client/SingleProject.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1162,7 +1162,7 @@ def single_project_view(request,pid):
         })
         
     else:
-        return render(request, 'client/PermissionDenied.html',{'profile1': profile1,
+        return render(request, 'Client/PermissionDenied.html',{'profile1': profile1,
             'profile2': profile2,
             'client': client,})      
 
@@ -1303,7 +1303,7 @@ def acc_deactivate(request):
     context = {
         'user_name': name
     }
-    html_content = render_to_string('client/deactivation.html', context)
+    html_content = render_to_string('Client/deactivation.html', context)
     text_content = strip_tags(html_content)
     email = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [user.email])
     email.attach_alternative(html_content, "text/html")
@@ -1354,7 +1354,7 @@ def create_repository(request):
                 return redirect('client:project_list')
         
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1372,7 +1372,7 @@ def download_invoice(request, contract_id):
     today = date.today()  # Get today's date
 
     # Render the HTML template with context
-    html_content = render_to_string('client/InvoiceDownload.html', {
+    html_content = render_to_string('Client/InvoiceDownload.html', {
         'project': project,
         'payments': payments,
         'today': today
@@ -1452,7 +1452,7 @@ def view_repository(request, repo_id):
         # Fetch cancellation details related to the project
         cancellation_details = CancellationRequest.objects.filter(project=project).first()
 
-        return render(request, 'client/SingleRepository.html', {
+        return render(request, 'Client/SingleRepository.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1469,7 +1469,7 @@ def view_repository(request, repo_id):
         })
         
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1510,7 +1510,7 @@ def add_github_link(request,repo_id):
             return redirect('client:view_repository', repo_id=repository.id)
         
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1546,7 +1546,7 @@ def add_file(request,repo_id):
             return redirect('client:view_repository', repo_id=repository.id)
         
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1583,7 +1583,7 @@ def add_url(request,repo_id):
             return redirect('client:view_repository', repo_id=repository.id)
         
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1623,7 +1623,7 @@ def add_note(request, repo_id):
                 messages.error(request, 'Note content cannot be empty.')
         
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1663,7 +1663,7 @@ def add_task(request, repo_id):
         task.save()
 
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1704,7 +1704,7 @@ def update_task_progress(request, repo_id):
             return redirect('client:view_repository', repo_id=repo_id) 
 
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1746,7 +1746,7 @@ def update_task_status(request, repo_id):
             return redirect('client:view_repository', repo_id=repo_id) 
 
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1789,7 +1789,7 @@ def edit_task(request, repo_id):
             return redirect('client:view_repository', repo_id=repo_id) 
 
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1846,7 +1846,7 @@ def submit_contract(request, pro_id):
 
         payment_installments = PaymentInstallment.objects.filter(contract=existing_contract) if existing_contract else None
         
-        return render(request, 'client/Agreement_template.html', {
+        return render(request, 'Client/Agreement_template.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1858,7 +1858,7 @@ def submit_contract(request, pro_id):
             'payment_installments': payment_installments,  # Pass payment installments to the template
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1930,7 +1930,7 @@ def chat_view(request):
                     'chat_room_id': chat.id  # Pass the chat room ID
                 })  # Store user, profile, register details, and chat room ID
         
-        return render(request, 'client/chat.html', {
+        return render(request, 'Client/chat.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -1938,7 +1938,7 @@ def chat_view(request):
             'freelancers': freelancers,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -2106,14 +2106,14 @@ def add_complaint(request):
 
                 messages.success(request, 'Complaint submitted successfully.')
                 return redirect('client:client_view') 
-        return render(request, 'client/AddComplaint.html', {
+        return render(request, 'Client/AddComplaint.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
             'freelancer_registers': freelancer_registers,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -2133,14 +2133,14 @@ def view_complaints(request):
     
     if profile1.permission:
         complaints = Complaint.objects.filter(user=profile1)
-        return render(request, 'client/Complaints.html', {
+        return render(request, 'Client/Complaints.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
             'complaints': complaints,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -2157,14 +2157,14 @@ def view_complaints_recieved(request):
     
     if profile1.permission:
         complaints = Complaint.objects.filter(complainee=profile1)
-        return render(request, 'client/RecievedComplaints.html', {
+        return render(request, 'Client/RecievedComplaints.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
             'complaints': complaints,
         })
     else:
-        return render(request, 'client/PermissionDenied.html', {
+        return render(request, 'Client/PermissionDenied.html', {
             'profile1': profile1,
             'profile2': profile2,
             'client': client,
@@ -2377,7 +2377,7 @@ def payments(request):
 
     payments_details_list = list(payments_details.values())
 
-    return render(request, 'client/payments.html', {
+    return render(request, 'Client/payments.html', {
         'payments_details': payments_details_list,
     })
     
@@ -2392,7 +2392,7 @@ def view_invoice(request, contract_id):
     project = contract.project
     payments = PaymentInstallment.objects.filter(contract_id=contract_id)
     today = date.today()  # Get today's date
-    return render(request, 'client/PaymentInvoice.html', {
+    return render(request, 'Client/PaymentInvoice.html', {
         'project': project,
         'payments': payments,
         'today': today  # Pass today's date to the template
@@ -2424,7 +2424,7 @@ def download_invoice(request, contract_id):
     else:
         client_name = client_profile.company_name
 
-    return render(request, 'client/InvoiceDownload.html', {
+    return render(request, 'Client/InvoiceDownload.html', {
         'project': project,
         'payments': payments,
         'today': today,
