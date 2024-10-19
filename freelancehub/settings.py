@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--vamx(qq%e)g0=)b$17dg&4kj0&%73+wztckvwmj8b%(8m3k-p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['freelancehub-production.up.railway.app', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['freelancehub-production.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://presidential-kelci-freelancehub-897cf51c.koyeb.app/', 'localhost', '127.0.0.1']
 
 
 
@@ -80,7 +81,7 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'freelancehub.urls'
 
-CSRF_TRUSTED_ORIGINS = ['https://freelancehub-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://presidential-kelci-freelancehub-897cf51c.koyeb.app/',]
 
 
 TEMPLATES = [
