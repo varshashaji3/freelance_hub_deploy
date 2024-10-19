@@ -25,14 +25,12 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
-from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
 from io import BytesIO
-from xhtml2pdf import pisa
 from datetime import timedelta
 from django.utils import timezone
 
@@ -2034,7 +2032,6 @@ from django.template import loader
 from io import BytesIO
 from django.conf import settings
 import os
-import imgkit
 from django.core.files.base import ContentFile
 
 from selenium import webdriver
