@@ -1117,7 +1117,6 @@ def generate_proposal(request,pid):
   
 from django.core.files.base import ContentFile
 
-from bs4 import BeautifulSoup
 
 @login_required
 @nocache
