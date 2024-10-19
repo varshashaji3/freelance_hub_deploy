@@ -2313,7 +2313,7 @@ def export_projects_pdf(request):
 
 
 
-
+import pandas as pd
 def export_projects_excel(request):
     user_id = request.user.id  # Get the logged-in user's ID
     projects = Project.objects.filter(user=user_id).select_related('freelancer')  # Get the projects directly
